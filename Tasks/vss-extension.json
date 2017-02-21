@@ -1,0 +1,36 @@
+{
+    "manifestVersion": 1,
+    "id": "build-task",
+    "name": "Statoil MAD build tasks",
+    "version": "0.0.33",
+    "publisher": "froderoslandhus",
+    "targets": [
+        {
+            "id": "Microsoft.VisualStudio.Services"
+        }
+    ],    
+    "description": "Tools for provisioning Azure infrastructure.",
+    "categories": [
+        "Build and release"
+    ],
+    "icons": {
+        "default": "images/extension-icon.png"        
+    },
+    "files": [
+        {
+            "path": "CreateApplicationTask"
+        }
+    ],
+    "contributions": [
+        {
+            "id": "mad-create-azure-application-build-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "CreateApplicationTask"
+            }
+        }
+    ]
+}
