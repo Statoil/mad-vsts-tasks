@@ -16,5 +16,9 @@
         "Strings",
         "task.json",
         "task.loc.json"
+    ],
+    "globalResources":[
+        "vss-extension.json",
+        "images"
     ]
 }

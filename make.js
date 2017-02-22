@@ -37,6 +37,7 @@ var pathExists = util.pathExists;
 var buildNodeTask = util.buildNodeTask;
 var addPath = util.addPath;
 var copyTaskResources = util.copyTaskResources;
+var copyGlobalResources = util.copyGlobalResources;
 var matchFind = util.matchFind;
 var matchCopy = util.matchCopy;
 var ensureTool = util.ensureTool;
@@ -94,7 +95,7 @@ target.clean = function () {
 // ex: node make.js build
 // ex: node make.js build --task ShellScript
 //
-target.build = function () {
+target.build = function() {
     target.clean();
 
     ensureTool('tsc', '--version', 'Version 1.8.7');
@@ -104,26 +105,34 @@ target.build = function () {
         }
     });
 
-    taskList.forEach(function (taskName) {
+    copyGlobalResources(path.join(__dirname, 'Tasks'), buildPath);
+
+    taskList.forEach(function(taskName) {
         banner('Building: ' + taskName);
         var taskPath = path.join(__dirname, 'Tasks', taskName);
         ensureExists(taskPath);
 
         // load the task.json
         var outDir;
+        var shouldBuildNode = test('-f', path.join(taskPath, 'tsconfig.json'));
         var taskJsonPath = path.join(taskPath, 'task.json');
-        var taskDef = require(taskJsonPath);
-        validateTask(taskDef);
+        if (test('-f', taskJsonPath)) {
+            var taskDef = require(taskJsonPath);
+            validateTask(taskDef);
 
-        // fixup the outDir (required for relative pathing in legacy L0 tests)
-        outDir = path.join(buildPath, taskDef.name);
+            // fixup the outDir (required for relative pathing in legacy L0 tests)
+            outDir = path.join(buildPath, taskDef.name);
 
-        // create loc files
-        createTaskLocJson(taskPath);
-        createResjson(taskDef, taskPath);
+            // create loc files
+            createTaskLocJson(taskPath);
+            createResjson(taskDef, taskPath);
 
-        // determine the type of task
-        shouldBuildNode = shouldBuildNode || taskDef.execution.hasOwnProperty('Node');
+            // determine the type of task
+            shouldBuildNode = shouldBuildNode || taskDef.execution.hasOwnProperty('Node');
+        }
+        else {
+            outDir = path.join(buildPath, path.basename(taskPath));
+        }
 
         mkdir('-p', outDir);
 
@@ -141,7 +150,7 @@ target.build = function () {
         if (taskMake.hasOwnProperty('common')) {
             var common = taskMake['common'];
 
-            common.forEach(function (mod) {
+            common.forEach(function(mod) {
                 var modPath = path.join(taskPath, mod['module']);
                 var modName = path.basename(modPath);
                 var modOutDir = path.join(commonPath, modName);
@@ -216,60 +225,23 @@ target.build = function () {
     banner('Build successful', true);
 }
 
-target.package = function () {
+target.package = function() {
     // clean
     rm('-Rf', packagePath);
 
-    // create the non-aggregated layout
-    util.createNonAggregatedZip(buildPath, packagePath);
-
-    // if task specified, create hotfix layout and short-circuit
-    if (options.task) {
-        util.createHotfixLayout(packagePath, options.task);
-        return;
-    }
-
-    // create the aggregated tasks layout
-    util.createAggregatedZip(packagePath);
-
-    // nuspec
-    var version = options.version;
-    if (!version) {
-        console.warn('Skipping nupkg creation. Supply version with --version.');
-        return;
-    }
-
-    if (!semver.valid(version)) {
-        fail('invalid semver version: ' + version);
-    }
-
-    var pkgName = 'Mseng.MS.TF.Build.Tasks';
-    console.log();
-    console.log('> Generating .nuspec file');
-    var contents = '<?xml version="1.0" encoding="utf-8"?>' + os.EOL;
-    contents += '<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">' + os.EOL;
-    contents += '   <metadata>' + os.EOL;
-    contents += '      <id>' + pkgName + '</id>' + os.EOL;
-    contents += '      <version>' + version + '</version>' + os.EOL;
-    contents += '      <authors>bigbldt</authors>' + os.EOL;
-    contents += '      <owners>bigbldt,Microsoft</owners>' + os.EOL;
-    contents += '      <requireLicenseAcceptance>false</requireLicenseAcceptance>' + os.EOL;
-    contents += '      <description>For VSS internal use only</description>' + os.EOL;
-    contents += '      <tags>VSSInternal</tags>' + os.EOL;
-    contents += '   </metadata>' + os.EOL;
-    contents += '</package>' + os.EOL;
-    var nuspecPath = path.join(packagePath, 'pack-source', pkgName + '.nuspec');
-    fs.writeFileSync(nuspecPath, contents);
-
     // package
-    ensureTool('nuget.exe');
-    var nupkgPath = path.join(packagePath, 'pack-target', `${pkgName}.${version}.nupkg`);
-    mkdir('-p', path.dirname(nupkgPath));
-    run(`nuget.exe pack ${nuspecPath} -OutputDirectory ${path.dirname(nupkgPath)}`);
+    ensureTool("tfx");
+    // var tfx = run(`where tfx`, false, true);
+    // if(!test("-e", tfx)) {
+    //     console.error('tfx is missing - please install');
+    // }
+    mkdir("-p", packagePath)
+    // ensureTool('tfx.exe');
+    run(`tfx extension create --manifest-globs vss-extension.json --root ${buildPath} --output-path ${packagePath}`);
 }
 
 // used by CI that does official publish
-target.publish = function () {
+target.publish = function() {
     var server = options.server;
     assert(server, 'server');
 
@@ -319,7 +291,7 @@ target.publish = function () {
 }
 
 // used to bump the patch version in task.json files
-target.bump = function () {
+target.bump = function() {
     taskList.forEach(function (taskName) {
         var taskJsonPath = path.join(__dirname, 'Tasks', taskName, 'task.json');
         var taskJson = JSON.parse(fs.readFileSync(taskJsonPath));

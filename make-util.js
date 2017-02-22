@@ -172,6 +172,17 @@ var copyTaskResources = function (taskMake, srcPath, destPath) {
 }
 exports.copyTaskResources = copyTaskResources;
 
+var copyGlobalResources = function(srcPath, destPath){
+    assert(srcPath, 'srcPath');
+    assert(destPath, 'destPath');
+
+    var toCopy = makeOptions['globalResources'];
+    toCopy.forEach(function(item){
+        matchCopy(item, srcPath, destPath, {noRecurse: true, matchBase: true});
+    });
+}
+exports.copyGlobalResources = copyGlobalResources;
+
 var matchFind = function (pattern, root, options) {
     assert(pattern, 'pattern');
     assert(root, 'root');
