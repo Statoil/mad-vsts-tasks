@@ -1,0 +1,74 @@
+{
+    "id": "534EA4ED-F152-4A24-B9E7-913C74B1E56C",
+    "name": "MADSetupKeyVaultAccess",
+    "friendlyName": "MAD Setup KeyVault Access Policy",
+    "description": "Configures certificate access to KeyVault from webapp",
+    "helpMarkDown": "",
+    "category": "Utility",
+    "author": "Statoil MAD",
+    "version": {
+        "Major": 0,
+        "Minor": 1,
+        "Patch": 5
+    },
+    "instanceNameFormat": "Key Vault Access Policy: $(ApplicationName)",
+    "groups": [
+        {
+            "name": "advanced",
+            "displayName": "Advanced",
+            "isExpanded": false
+        }
+    ],
+    "inputs": [
+        {
+            "name": "ConnectedServiceNameARM",
+            "type": "connectedService:AzureRM",
+            "label": "Azure RM Subscription",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Azure Resource Manager subscription to configure before running PowerShell"
+        },
+        {
+            "name": "KeyVaultName",
+            "type": "string",
+            "label": "KeyVault Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "The display name of the KeyVault where the certificate will be stored"
+        },
+        {
+            "name": "CertificateLocation",
+            "type": "string",
+            "label": "Certificate Location",
+            "defaultValue": "",
+            "required": false,
+            "helpMarkDown": "Where to find the certificate",
+            "visibleRule": "AddCertificateCredential = true",
+            "groupName": "advanced"            
+        },
+        {
+            "name": "CertificatePassword",
+            "type": "string",
+            "label": "Certificate Password",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Use secure variable for this"
+        },
+        {
+            "name": "WebApp",
+            "type": "string",
+            "label": "Web Application Name",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Web application that will be granted access to the keyvault"
+        }
+    ],
+    "execution": {
+        "PowerShell3": {
+            "target": "SetupKeyVaultAccess.ps1"
+        }
+    },
+    "messages":{
+        "AppAlreadyExists": "Application already exists: '{0}'"
+    }
+}
