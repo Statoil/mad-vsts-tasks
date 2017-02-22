@@ -1,5 +1,5 @@
 {
-    "id": "534EA4ED-F152-4A24-B9E7-913C74B1E56C",
+    "id": "534EA4ED-F152-4A24-B9E7-913C75B1E56C",
     "name": "MADSetupKeyVaultAccess",
     "friendlyName": "MAD Setup KeyVault Access Policy",
     "description": "Configures certificate access to KeyVault from webapp",
@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 5
+        "Patch": 11
     },
     "instanceNameFormat": "Key Vault Access Policy: $(ApplicationName)",
     "groups": [
@@ -20,13 +20,35 @@
         }
     ],
     "inputs": [
+       {
+            "name": "ConnectedServiceNameSelector",
+            "type": "pickList",
+            "label": "Azure Connection Type",
+            "required": false,
+            "helpMarkDown": "",
+            "defaultValue": "ConnectedServiceName",
+            "options": {
+                "ConnectedServiceName": "Azure Classic",
+                "ConnectedServiceNameARM": "Azure Resource Manager"
+            }
+        },
+        {
+            "name": "ConnectedServiceName",
+            "type": "connectedService:Azure",
+            "label": "Azure Classic Subscription",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Azure Classic subscription to configure before running PowerShell",
+            "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
+        },
         {
             "name": "ConnectedServiceNameARM",
             "type": "connectedService:AzureRM",
             "label": "Azure RM Subscription",
             "defaultValue": "",
             "required": true,
-            "helpMarkDown": "Azure Resource Manager subscription to configure before running PowerShell"
+            "helpMarkDown": "Azure Resource Manager subscription to configure before running PowerShell",
+            "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceNameARM"
         },
         {
             "name": "KeyVaultName",
@@ -41,10 +63,8 @@
             "type": "string",
             "label": "Certificate Location",
             "defaultValue": "",
-            "required": false,
-            "helpMarkDown": "Where to find the certificate",
-            "visibleRule": "AddCertificateCredential = true",
-            "groupName": "advanced"            
+            "required": true,
+            "helpMarkDown": "Where to find the certificate"
         },
         {
             "name": "CertificatePassword",

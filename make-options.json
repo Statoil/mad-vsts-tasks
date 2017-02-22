@@ -1,12 +1,14 @@
 {
     "tasks": [
-        "CreateApplicationTask"
+        "MADCreateApplication",
+        "MADSetupKeyVaultAccess"
     ],
     "taskResources": [
         "*.ps1",
         "*.psd1",
         "*.psm1",
         "*.sh",
+        "*.dll",
         "*.txt",
         "icon.png",
         "icon.svg",

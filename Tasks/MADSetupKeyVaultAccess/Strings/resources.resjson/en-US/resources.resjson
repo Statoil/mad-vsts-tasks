@@ -1,0 +1,21 @@
+{
+  "loc.friendlyName": "MAD Setup KeyVault Access Policy",
+  "loc.helpMarkDown": "",
+  "loc.description": "Configures certificate access to KeyVault from webapp",
+  "loc.instanceNameFormat": "Key Vault Access Policy: $(ApplicationName)",
+  "loc.group.displayName.advanced": "Advanced",
+  "loc.input.label.ConnectedServiceNameSelector": "Azure Connection Type",
+  "loc.input.label.ConnectedServiceName": "Azure Classic Subscription",
+  "loc.input.help.ConnectedServiceName": "Azure Classic subscription to configure before running PowerShell",
+  "loc.input.label.ConnectedServiceNameARM": "Azure RM Subscription",
+  "loc.input.help.ConnectedServiceNameARM": "Azure Resource Manager subscription to configure before running PowerShell",
+  "loc.input.label.KeyVaultName": "KeyVault Name",
+  "loc.input.help.KeyVaultName": "The display name of the KeyVault where the certificate will be stored",
+  "loc.input.label.CertificateLocation": "Certificate Location",
+  "loc.input.help.CertificateLocation": "Where to find the certificate",
+  "loc.input.label.CertificatePassword": "Certificate Password",
+  "loc.input.help.CertificatePassword": "Use secure variable for this",
+  "loc.input.label.WebApp": "Web Application Name",
+  "loc.input.help.WebApp": "Web application that will be granted access to the keyvault",
+  "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
+}

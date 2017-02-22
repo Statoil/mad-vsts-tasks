@@ -1,0 +1,94 @@
+{
+  "id": "534EA4ED-F152-4A24-B9E7-913C75B1E56C",
+  "name": "MADSetupKeyVaultAccess",
+  "friendlyName": "ms-resource:loc.friendlyName",
+  "description": "ms-resource:loc.description",
+  "helpMarkDown": "ms-resource:loc.helpMarkDown",
+  "category": "Utility",
+  "author": "Statoil MAD",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 11
+  },
+  "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
+  "groups": [
+    {
+      "name": "advanced",
+      "displayName": "ms-resource:loc.group.displayName.advanced",
+      "isExpanded": false
+    }
+  ],
+  "inputs": [
+    {
+      "name": "ConnectedServiceNameSelector",
+      "type": "pickList",
+      "label": "ms-resource:loc.input.label.ConnectedServiceNameSelector",
+      "required": false,
+      "helpMarkDown": "",
+      "defaultValue": "ConnectedServiceName",
+      "options": {
+        "ConnectedServiceName": "Azure Classic",
+        "ConnectedServiceNameARM": "Azure Resource Manager"
+      }
+    },
+    {
+      "name": "ConnectedServiceName",
+      "type": "connectedService:Azure",
+      "label": "ms-resource:loc.input.label.ConnectedServiceName",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ConnectedServiceName",
+      "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
+    },
+    {
+      "name": "ConnectedServiceNameARM",
+      "type": "connectedService:AzureRM",
+      "label": "ms-resource:loc.input.label.ConnectedServiceNameARM",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ConnectedServiceNameARM",
+      "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceNameARM"
+    },
+    {
+      "name": "KeyVaultName",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.KeyVaultName",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.KeyVaultName"
+    },
+    {
+      "name": "CertificateLocation",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.CertificateLocation",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.CertificateLocation"
+    },
+    {
+      "name": "CertificatePassword",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.CertificatePassword",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.CertificatePassword"
+    },
+    {
+      "name": "WebApp",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.WebApp",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.WebApp"
+    }
+  ],
+  "execution": {
+    "PowerShell3": {
+      "target": "SetupKeyVaultAccess.ps1"
+    }
+  },
+  "messages": {
+    "AppAlreadyExists": "ms-resource:loc.messages.AppAlreadyExists"
+  }
+}

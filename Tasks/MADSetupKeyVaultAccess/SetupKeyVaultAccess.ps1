@@ -7,12 +7,17 @@ $vaultName = Get-VstsInput -Name KeyVaultName
 
 try{
     Import-Module $PSScriptRoot\ps_modules\VstsAzureHelpers_
+    Import-Module $PSScriptRoot\ps_modules\MADHelpers
     Initialize-Azure
+    Initialize-MAD
 
     $global:ErrorActionPreference = 'Continue'
     $global:__vstsNoOverrideVerbose = $true
 
-    Upload-CertificateToKeyVault -certificateLocation $certificateLocation -certificatePassword $certificatePassword -vaultName $vaultName
+   # Upload-CertificateToKeyVault -certificateLocation $certificateLocation -certificatePassword $certificatePassword -vaultName $vaultName
+    $result = Get-AzureRestValue "subscriptions?api-version=2014-04-01"
+    Write-Warning "Yay - Got values"
+    Write-Warning $result.displayName
 }
 finally{
 

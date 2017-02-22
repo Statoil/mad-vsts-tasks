@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-task",
     "name": "Statoil MAD build tasks",
-    "version": "0.0.33",
+    "version": "0.0.47",
     "publisher": "froderoslandhus",
     "targets": [
         {
@@ -19,6 +19,9 @@
     "files": [
         {
             "path": "MADCreateApplication"
+        },
+        {
+            "path": "MADSetupKeyVaultAccess"
         }
     ],
     "contributions": [
@@ -30,6 +33,16 @@
             ],
             "properties": {
                 "name": "MADCreateApplication"
+            }
+        },
+        {
+            "id": "mad-setup-keyvault-access-build-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "MADSetupKeyVaultAccess"
             }
         }
     ]
