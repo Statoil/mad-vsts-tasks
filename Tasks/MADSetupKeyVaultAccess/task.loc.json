@@ -9,10 +9,15 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 11
+    "Patch": 32
   },
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "groups": [
+    {
+      "name": "AzureDetails",
+      "displayName": "ms-resource:loc.group.displayName.AzureDetails",
+      "isExpanded": true
+    },
     {
       "name": "advanced",
       "displayName": "ms-resource:loc.group.displayName.advanced",
@@ -25,6 +30,7 @@
       "type": "pickList",
       "label": "ms-resource:loc.input.label.ConnectedServiceNameSelector",
       "required": false,
+      "groupName": "AzureDetails",
       "helpMarkDown": "",
       "defaultValue": "ConnectedServiceName",
       "options": {
@@ -37,6 +43,7 @@
       "type": "connectedService:Azure",
       "label": "ms-resource:loc.input.label.ConnectedServiceName",
       "defaultValue": "",
+      "groupName": "AzureDetails",
       "required": true,
       "helpMarkDown": "ms-resource:loc.input.help.ConnectedServiceName",
       "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
@@ -46,9 +53,21 @@
       "type": "connectedService:AzureRM",
       "label": "ms-resource:loc.input.label.ConnectedServiceNameARM",
       "defaultValue": "",
+      "groupName": "AzureDetails",
       "required": true,
       "helpMarkDown": "ms-resource:loc.input.help.ConnectedServiceNameARM",
       "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceNameARM"
+    },
+    {
+      "name": "resourceGroupName",
+      "type": "pickList",
+      "label": "ms-resource:loc.input.label.resourceGroupName",
+      "required": true,
+      "groupName": "AzureDetails",
+      "helpMarkDown": "ms-resource:loc.input.help.resourceGroupName",
+      "properties": {
+        "EditableOptions": "True"
+      }
     },
     {
       "name": "KeyVaultName",
@@ -88,6 +107,13 @@
       "target": "SetupKeyVaultAccess.ps1"
     }
   },
+  "dataSourceBindings": [
+    {
+      "target": "resourceGroupName",
+      "endpointId": "$(ConnectedServiceName)",
+      "dataSourceName": "AzureResourceGroups"
+    }
+  ],
   "messages": {
     "AppAlreadyExists": "ms-resource:loc.messages.AppAlreadyExists"
   }

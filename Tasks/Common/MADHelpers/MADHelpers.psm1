@@ -21,7 +21,7 @@ function Initialize-MAD {
     $endpoint = Get-VstsEndpoint -Name $serviceName -Require
 
     try{
-        Write-Host "##[command]Get-AuthTokenSpn *******"
+        Write-Host "##[command]Authenticating..."
         $script:authToken = Get-AuthTokenSpn https://management.azure.com/  $endpoint.Auth.Parameters.TenantId $endpoint.Auth.Parameters.ServicePrincipalId $endpoint.Auth.Parameters.ServicePrincipalKey
     }
     catch{
@@ -38,7 +38,7 @@ function Get-AzureRestValue {
     )
     Trace-VstsEnteringInvocation $MyInvocation
     try {
-        Write-Host "##[command]Get-AzureRestValue $Uri"
+        #Write-Host "##[command]Get-AzureRestValue $Uri"
         
         if(!$script:authToken){
             Write-VstsTaskError -Message "No auth token present"
@@ -48,7 +48,36 @@ function Get-AzureRestValue {
             'Content-Type'='application\json'
             'Authorization'=$script:authToken.CreateAuthorizationHeader()
         }
-        $result = (Invoke-RestMethod -Uri "https://management.azure.com/$Uri" -Headers $header -Method Get).value
+        $result = Invoke-RestMethod -Uri "https://management.azure.com/$Uri" -Headers $header -Method Get
+        return $result
+    }
+    catch {
+        Write-VstsTaskError -Message $_.Exception.Message
+    } finally {
+        Trace-VstsLeavingInvocation $MyInvocation
+    }
+}
+
+function Set-AzureRestValue {
+    [CmdletBinding()]
+    param(
+        $Uri,
+        $Payload
+    )
+
+    Trace-VstsEnteringInvocation $MyInvocation
+    try {
+        #Write-Host "##[command]Set-AzureRestValue $Uri"
+        
+        if(!$script:authToken){
+            Write-VstsTaskError -Message "No auth token present"
+            return;
+        }
+        $header = @{
+            'Content-Type'='application/json;odata=verbose'
+            'Authorization'=$script:authToken.CreateAuthorizationHeader()
+        }
+        $result = Invoke-RestMethod -Uri "https://management.azure.com/$Uri" -Headers $header -Method Put -Body $Payload
         return $result
     }
     catch {
@@ -59,3 +88,4 @@ function Get-AzureRestValue {
 }
 Export-ModuleMember -Function Initialize-MAD
 Export-ModuleMember -Function Get-AzureRestValue
+Export-ModuleMember -Function Set-AzureRestValue
