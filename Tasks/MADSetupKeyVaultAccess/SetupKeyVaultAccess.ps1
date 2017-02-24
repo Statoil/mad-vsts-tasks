@@ -21,14 +21,17 @@ try{
     $global:ErrorActionPreference = 'Continue'
     $global:__vstsNoOverrideVerbose = $true
     $user = $endpoint.Auth.Parameters.ServicePrincipalId
-    
+    $pfx = Get-Certificate -certificateLocation $certificateLocation -certificatePassword (ConvertTo-SecureString -String $certificatePassword -AsPlainText -Force)
     Write-Host "##[command]Upload-CertificateToKeyVault"
-    Upload-CertificateToKeyVault -certificateLocation "$env:BUILD_SOURCESDIRECTORY\$certificateLocation" -certificatePassword (ConvertTo-SecureString -String $certificatePassword -AsPlainText -Force) -vaultName $vaultName -user $user -tenantId $endpoint.Auth.Parameters.TenantId
+    Upload-CertificateToKeyVault -certificate $pfx -vaultName $vaultName -user $user -tenantId $endpoint.Auth.Parameters.TenantId
     Write-Host "##[command]Add-CertificateToWebApp $webappName in $resourceGroupName"
     Add-CertificateToWebApp $resourceGroupName $webappName $vaultName
+    Set-AppSetting $webappName $resourceGroupName "Keyvault:Thumbprint" "$($pfx.Thumbprint)"
+    Set-AppSetting $webappName $resourceGroupName "WEBSITE_LOAD_CERTIFICATES" "$($pfx.Thumbprint)"
 }
 catch{
     Write-VstsTaskError -Message $_.Exception.Message
+    throw (New-Object System.Exception("Failed to configure keyvault access", $_.Exception))
 }
 finally{
 

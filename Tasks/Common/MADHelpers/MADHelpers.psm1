@@ -86,6 +86,36 @@ function Set-AzureRestValue {
         Trace-VstsLeavingInvocation $MyInvocation
     }
 }
+
+function Set-AppSetting {
+    [CmdletBinding()]
+    param(
+        [string]$webappname,
+        [string]$resourcegroup,
+        [string]$name,
+        [string]$value
+    )
+    Trace-VstsEnteringInvocation $MyInvocation
+     try {
+        Write-Host "##[command]Set-AppSetting $name"
+        $webapp = Get-AzureRmWebApp -Name $webappname -ResourceGroupName $resourcegroup
+        $appSettings = $webapp.SiteConfig.AppSettings
+
+        $settings = @{}
+        foreach($setting in $appSettings){
+            $settings[$setting.Name] = $setting.Value
+        }
+        $settings[$name] = $value
+
+        $app = Set-AzureRmWebApp -Name $webappname -ResourceGroupName $resourcegroup -AppSettings $settings
+    }
+    catch {
+        Write-VstsTaskError -Message $_.Exception.Message
+    } finally {
+        Trace-VstsLeavingInvocation $MyInvocation
+    }
+}
 Export-ModuleMember -Function Initialize-MAD
 Export-ModuleMember -Function Get-AzureRestValue
 Export-ModuleMember -Function Set-AzureRestValue
+Export-ModuleMember -Function Set-AppSetting

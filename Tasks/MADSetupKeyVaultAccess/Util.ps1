@@ -1,7 +1,20 @@
-function Upload-CertificateToKeyVault {
+function Get-Certificate {
     param(
         [string]$certificateLocation,
-        [securestring]$certificatePassword,
+        [securestring]$certificatePassword
+    )
+
+    Write-Host "##[command]Importing $certificateLocation"    
+    $flag = [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable
+    $pfx = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
+    $pfx.Import($certificateLocation, $certificatePassword, $flag)
+    
+    return $pfx
+}
+
+function Upload-CertificateToKeyVault {
+    param(
+        [System.Security.Cryptography.X509Certificates.X509Certificate2]$certificate,
         [string]$vaultName,
         [string]$user,
         [string]$tenantId
@@ -12,17 +25,14 @@ function Upload-CertificateToKeyVault {
     Write-Host "##[command]Adding $tenantId $user to access policy"
     Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName $user -PermissionsToSecrets All
     
-    Write-Host "##[command]Uploading $certificateLocation to vault"    
-    $flag = [System.Security.Cryptography.X509Certificates.X509KeyStorageFlags]::Exportable
-    $pfx = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
-    $pfx.Import($certificateLocation, $certificatePassword, $flag)
     $pcks12ContentType = [System.Security.Cryptography.X509Certificates.X509ContentType]::Pkcs12
-    $clearBytes = $pfx.Export($pcks12ContentType)
+    $clearBytes = $certificate.Export($pcks12ContentType)
     $fileContentEncoded = [System.Convert]::ToBase64String($clearBytes)
     $secret = ConvertTo-SecureString -String $fileContentEncoded -AsPlainText -Force
     $secretContentType = "application/x-pkcs12"
 
     $result = Set-AzureKeyVaultSecret -VaultName $vaultName -Name keyVaultCert -SecretValue $secret -ContentType $secretContentType
+    
 }
 
 function Add-KeyVaultAccessPolicy {
