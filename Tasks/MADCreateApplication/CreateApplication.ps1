@@ -14,7 +14,7 @@ try{
     $global:ErrorActionPreference = 'Continue'
     $global:__vstsNoOverrideVerbose = $true
     
-    if ($useCertificate -eq $true) {
+    if ($useCertificate) {
         $x509 = New-Object System.Security.Cryptography.X509Certificates.X509Certificate2
         $x509.Import($certificatePath)
         $credentials = [System.Convert]::ToBase64String($x509.GetRawCertData())

@@ -26,6 +26,7 @@ try{
     Upload-CertificateToKeyVault -certificate $pfx -vaultName $vaultName -user $user -tenantId $endpoint.Auth.Parameters.TenantId
     Write-Host "##[command]Add-CertificateToWebApp $webappName in $resourceGroupName"
     Add-CertificateToWebApp $resourceGroupName $webappName $vaultName
+    Set-AppSetting $webappName $resourceGroupName "Keyvault:Name" "$vaultName"
     Set-AppSetting $webappName $resourceGroupName "Keyvault:Thumbprint" "$($pfx.Thumbprint)"
     Set-AppSetting $webappName $resourceGroupName "WEBSITE_LOAD_CERTIFICATES" "$($pfx.Thumbprint)"
 }
@@ -34,6 +35,6 @@ catch{
     throw (New-Object System.Exception("Failed to configure keyvault access", $_.Exception))
 }
 finally{
-
+        Trace-VstsLeavingInvocation $MyInvocation
 }
 
