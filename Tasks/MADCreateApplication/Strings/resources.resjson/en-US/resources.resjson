@@ -22,7 +22,5 @@
   "loc.input.help.CertificateLocation": "Where to find the certificate",
   "loc.input.label.CertificatePassword": "Certificate Password",
   "loc.input.help.CertificatePassword": "Use secure variable for this",
-  "loc.input.label.ScriptArguments": "Script Arguments",
-  "loc.input.help.ScriptArguments": "Additional parameters to pass to PowerShell.  Can be either ordinal or named parameters.",
   "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
 }

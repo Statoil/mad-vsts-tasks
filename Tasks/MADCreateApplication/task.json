@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 13
+        "Patch": 16
     },
     "instanceNameFormat": "Create Application: $(ApplicationName)",
     "groups": [
@@ -110,17 +110,6 @@
             "required": false,
             "helpMarkDown": "Use secure variable for this",
             "groupName": "advanced"
-        },
-        {
-            "name": "ScriptArguments",
-            "type": "string",
-            "label": "Script Arguments",
-            "defaultValue": "",
-            "required": false,
-            "properties": {
-                "editorExtension": "ms.vss-services-azure.parameters-grid"
-            },
-            "helpMarkDown": "Additional parameters to pass to PowerShell.  Can be either ordinal or named parameters."
         }
     ],
     "execution": {

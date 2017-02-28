@@ -33,6 +33,7 @@ try{
             Write-Host "`tUpdating credentials for application"
             Update-CertificateCredentials -applicationId $apps[0].ApplicationId -certificate $pfx
             $sp =  Create-ServicePrincipal $apps[0]
+            Write-Host "##vso[task.setvariable variable=APPLICATIONID;]$($apps[0].ApplicationId)"            
         }
         return
     }
@@ -45,8 +46,7 @@ try{
     else {
         $adApp = New-AzureRmADApplication -DisplayName $applicationName -HomePage $signInUrl -IdentifierUris $identifierUri
     }
-    
-    Write-Host ("##vso[setvariable variable=APPLICATIONID]$($app.ApplicationId)")
+    Write-Host "##vso[task.setvariable variable=APPLICATIONID;]$($adApp.ApplicationId)"
 }
 catch {
     Write-VstsTaskError -Message $_.Exception.Message
