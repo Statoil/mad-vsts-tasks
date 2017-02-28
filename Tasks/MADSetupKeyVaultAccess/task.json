@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 36
+        "Patch": 44
     },
     "instanceNameFormat": "Key Vault Access Policy: $(ApplicationName)",
     "groups": [
@@ -100,6 +100,14 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "Web application that will be granted access to the keyvault"
+        },
+        {
+            "name": "AzureADApplication",
+            "type": "string",
+            "label": "Azure AD Application",
+            "defaultValue": "",
+            "required": true,
+            "helpMarkDown": "Display name of the Azure AD Application that will be given access"
         }
     ],
     "execution": {

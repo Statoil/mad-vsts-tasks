@@ -20,5 +20,7 @@
   "loc.input.help.CertificatePassword": "Use secure variable for this",
   "loc.input.label.WebApp": "Web Application Name",
   "loc.input.help.WebApp": "Web application that will be granted access to the keyvault",
+  "loc.input.label.AzureADApplication": "Azure AD Application",
+  "loc.input.help.AzureADApplication": "Display name of the Azure AD Application that will be given access",
   "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
 }

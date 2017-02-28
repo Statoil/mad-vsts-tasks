@@ -20,7 +20,7 @@ function Upload-CertificateToKeyVault {
         [string]$tenantId
     )
     Write-Host "##[command]Adding Azure management to access policy"
-    Add-KeyVaultAccessPolicy $tenantId $vaultName "397507d3-5375-43c9-ac83-f537e230e73a"
+    Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName abfa0a7c-a6b6-4736-8310-5855508787cd -PermissionsToSecrets All
     
     Write-Host "##[command]Adding $tenantId $user to access policy"
     Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName $user -PermissionsToSecrets All

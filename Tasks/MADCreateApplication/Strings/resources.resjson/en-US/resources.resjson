@@ -3,7 +3,11 @@
   "loc.helpMarkDown": "",
   "loc.description": "Creates an Azure AD Application",
   "loc.instanceNameFormat": "Create Application: $(ApplicationName)",
+  "loc.group.displayName.AzureDetails": "Azure Details",
   "loc.group.displayName.advanced": "Advanced",
+  "loc.input.label.ConnectedServiceNameSelector": "Azure Connection Type",
+  "loc.input.label.ConnectedServiceName": "Azure Classic Subscription",
+  "loc.input.help.ConnectedServiceName": "Azure Classic subscription to configure before running PowerShell",
   "loc.input.label.ConnectedServiceNameARM": "Azure RM Subscription",
   "loc.input.help.ConnectedServiceNameARM": "Azure Resource Manager subscription to configure before running PowerShell",
   "loc.input.label.ApplicationName": "Application Name",
@@ -16,5 +20,9 @@
   "loc.input.help.AddCertificateCredential": "If this is true, the Azure AD Application will use certificate credentials for use with access policies.",
   "loc.input.label.CertificateLocation": "Certificate Location",
   "loc.input.help.CertificateLocation": "Where to find the certificate",
+  "loc.input.label.CertificatePassword": "Certificate Password",
+  "loc.input.help.CertificatePassword": "Use secure variable for this",
+  "loc.input.label.ScriptArguments": "Script Arguments",
+  "loc.input.help.ScriptArguments": "Additional parameters to pass to PowerShell.  Can be either ordinal or named parameters.",
   "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
 }

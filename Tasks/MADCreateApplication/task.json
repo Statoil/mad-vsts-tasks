@@ -9,10 +9,15 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 5
+        "Patch": 13
     },
     "instanceNameFormat": "Create Application: $(ApplicationName)",
     "groups": [
+        {
+            "name": "AzureDetails",
+            "displayName": "Azure Details",
+            "isExpanded": true
+        },
         {
             "name": "advanced",
             "displayName": "Advanced",
@@ -21,12 +26,37 @@
     ],
     "inputs": [
         {
+            "name": "ConnectedServiceNameSelector",
+            "type": "pickList",
+            "label": "Azure Connection Type",
+            "required": false,
+            "groupName": "AzureDetails",
+            "helpMarkDown": "",
+            "defaultValue": "ConnectedServiceName",
+            "options": {
+                "ConnectedServiceName": "Azure Classic",
+                "ConnectedServiceNameARM": "Azure Resource Manager"
+            }
+        },
+        {
+            "name": "ConnectedServiceName",
+            "type": "connectedService:Azure",
+            "label": "Azure Classic Subscription",
+            "defaultValue": "",
+            "groupName": "AzureDetails",
+            "required": true,
+            "helpMarkDown": "Azure Classic subscription to configure before running PowerShell",
+            "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
+        },
+        {
             "name": "ConnectedServiceNameARM",
             "type": "connectedService:AzureRM",
             "label": "Azure RM Subscription",
             "defaultValue": "",
+            "groupName": "AzureDetails",
             "required": true,
-            "helpMarkDown": "Azure Resource Manager subscription to configure before running PowerShell"
+            "helpMarkDown": "Azure Resource Manager subscription to configure before running PowerShell",
+            "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceNameARM"
         },
         {
             "name": "ApplicationName",
@@ -69,7 +99,28 @@
             "required": false,
             "helpMarkDown": "Where to find the certificate",
             "visibleRule": "AddCertificateCredential = true",
-            "groupName": "advanced"            
+            "groupName": "advanced"
+        },
+        {
+            "name": "CertificatePassword",
+            "type": "string",
+            "label": "Certificate Password",
+            "defaultValue": "",
+            "visibleRule": "AddCertificateCredential = true",
+            "required": false,
+            "helpMarkDown": "Use secure variable for this",
+            "groupName": "advanced"
+        },
+        {
+            "name": "ScriptArguments",
+            "type": "string",
+            "label": "Script Arguments",
+            "defaultValue": "",
+            "required": false,
+            "properties": {
+                "editorExtension": "ms.vss-services-azure.parameters-grid"
+            },
+            "helpMarkDown": "Additional parameters to pass to PowerShell.  Can be either ordinal or named parameters."
         }
     ],
     "execution": {
@@ -77,7 +128,7 @@
             "target": "CreateApplication.ps1"
         }
     },
-    "messages":{
+    "messages": {
         "AppAlreadyExists": "Application already exists: '{0}'"
     }
 }
