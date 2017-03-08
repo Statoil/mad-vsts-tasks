@@ -19,11 +19,6 @@ function Upload-CertificateToKeyVault {
         [string]$user,
         [string]$tenantId
     )
-    Write-Host "##[command]Adding Azure management to access policy"
-    Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName abfa0a7c-a6b6-4736-8310-5855508787cd -PermissionsToSecrets All
-    
-    Write-Host "##[command]Adding $tenantId $user to access policy"
-    Set-AzureRmKeyVaultAccessPolicy -VaultName $vaultName -ServicePrincipalName $user -PermissionsToSecrets All
     
     $pcks12ContentType = [System.Security.Cryptography.X509Certificates.X509ContentType]::Pkcs12
     $clearBytes = $certificate.Export($pcks12ContentType)

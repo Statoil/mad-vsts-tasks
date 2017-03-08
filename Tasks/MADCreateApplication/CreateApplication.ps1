@@ -16,7 +16,7 @@ try{
     $global:ErrorActionPreference = 'Stop'
     $global:__vstsNoOverrideVerbose = $true
     
-    if ($useCertificate) {
+    if ($useCertificate -eq $true) {
         $certificateLocation = Get-VstsInput -Name CertificateLocation
         $certificatePassword = Get-VstsInput -Name CertificatePassword
         $pfx = Get-Certificate -certificateLocation $certificateLocation -certificatePassword (ConvertTo-SecureString -String $certificatePassword -AsPlainText -Force)
@@ -29,7 +29,7 @@ try{
     }
     if($apps.Length -eq 1) {
         Write-Host "`t'$applicationName' already exists"
-        if($useCertificate) { 
+        if($useCertificate -eq $true) { 
             Write-Host "`tUpdating credentials for application"
             Update-CertificateCredentials -applicationId $apps[0].ApplicationId -certificate $pfx
             $sp =  Create-ServicePrincipal $apps[0]
@@ -38,7 +38,7 @@ try{
         return
     }
 
-    if($useCertificate) {
+    if($useCertificate -eq $true) {
         $credentials = [System.Convert]::ToBase64String($pfx.GetRawCertData())
         $adApp = New-AzureRmADApplication -DisplayName $applicationName -HomePage $signInUrl -IdentifierUris $identifierUri -CertValue $credentials -StartDate $pfx.NotBefore -EndDate $pfx.NotAfter
         $sp =  Create-ServicePrincipal $adApp

@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-task",
     "name": "Statoil MAD build tasks",
-    "version": "0.0.83",
+    "version": "0.1.0",
     "publisher": "froderoslandhus",
     "targets": [
         {
