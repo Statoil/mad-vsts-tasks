@@ -9,15 +9,26 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 18
+        "Patch": 22
     },
-    "preview": "true",
-    "instanceNameFormat": "Configure API: $(ApplicationName)",
+    "instanceNameFormat": "$(action)",
     "groups": [
         {
             "name": "advanced",
             "displayName": "Advanced",
             "isExpanded": false
+        },
+        {
+            "name": "ApiProduct",
+            "displayName": "Create Or Update Product",
+            "isExpanded": true,
+            "visibleRule": "action = Create Or Update API Product"
+        },
+        {
+            "name": "ApiDefinition",
+            "displayName": "Create Or Update API",
+            "isExpanded": true,
+            "visibleRule": "action = Create Or Update API definition"
         }
     ],
     "inputs": [
@@ -52,11 +63,24 @@
             "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
         },
         {
+            "name": "action",
+            "type": "pickList",
+            "label": "Action",
+            "defaultValue": "Create Or Update API definition",
+            "required": true,
+            "helpMarkDown": "Action to be performed on API Management",
+            "options": {
+                "Create Or Update API definition": "Create Or Update API definition",
+                "Create Or Update API Product": "Create Or Update API Product"
+            }
+        },
+        {
             "name": "WebAppName",
             "type": "pickList",
             "label": "App Service name",
             "defaultValue": "",
             "required": true,
+            "groupName": "ApiDefinition",
             "properties": {
                 "EditableOptions": "True"
             },
@@ -67,7 +91,7 @@
             "type": "pickList",
             "label": "Resource group",
             "required": true,
-            "helpMarkDown": "Provide the name of a resource group.",
+            "helpMarkDown": "Provide the name of a resource group where API Management resources reside",
             "properties": {
                 "EditableOptions": "True"
             }
@@ -83,9 +107,20 @@
             }
         },
         {
+            "name": "ApiProduct",
+            "type": "pickList",
+            "label": "API Product",
+            "required": true,
+            "helpMarkDown": "Provide the name of a API product to create or update",
+            "properties": {
+                "EditableOptions": "True"
+            }
+        },
+        {
             "name": "ApiName",
             "type": "pickList",
             "label": "API Name",
+            "groupName": "ApiDefinition",
             "required": true,
             "helpMarkDown": "Provide the name of a API to create or update",
             "properties": {
@@ -96,8 +131,39 @@
             "name": "ApiPath",
             "type": "string",
             "label": "API Path",
+            "groupName": "ApiDefinition",
             "required": true,
             "helpMarkDown": "Provide the path where the API will be made available"
+        },
+        {
+            "name": "UseProxyCredentials",
+            "type": "boolean",
+            "label": "Use proxy credentials",
+            "required": false,
+            "helpMarkDown": "Use certificate credentials between API Management and API",
+            "groupName": "advanced",
+            "defaultValue": "false"
+        },
+        {
+            "name": "Description",
+            "type": "string",
+            "label": "Description",
+            "groupName": "ApiProduct",
+            "required": false
+        },
+        {
+            "name": "ApprovalRequired",
+            "type": "boolean",
+            "label": "Approval Required",
+            "groupName": "ApiProduct",
+            "required": false
+        },
+        {
+            "name": "SubscriptionRequired",
+            "type": "boolean",
+            "label": "Subscription Required",
+            "groupName": "ApiProduct",
+            "required": false
         }
     ],
     "dataSourceBindings": [
@@ -126,6 +192,16 @@
             "name": "availableApis",
             "endpointId": "$(ConnectedServiceName)",
             "endpointUrl": "{{endpoint.url}}/subscriptions/$(endpoint.subscriptionId)/resourceGroups/$(ResourceGroupName)/providers/Microsoft.ApiManagement/service/$(ApiManagement)/apis/?api-version=2016-10-10",
+            "resultSelector": "jsonpath:$.value[*].name",
+            "parameters": {
+                "ApiManagement": "$(ApiManagement)"
+            }
+        },
+        {
+            "target": "ApiProduct",
+            "name": "availableProducts",
+            "endpointId": "$(ConnectedServiceName)",
+            "endpointUrl": "{{endpoint.url}}/subscriptions/$(endpoint.subscriptionId)/resourceGroups/$(ResourceGroupName)/providers/Microsoft.ApiManagement/service/$(ApiManagement)/products/?api-version=2016-10-10",
             "resultSelector": "jsonpath:$.value[*].name",
             "parameters": {
                 "ApiManagement": "$(ApiManagement)"

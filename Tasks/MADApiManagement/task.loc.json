@@ -9,15 +9,26 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 18
+    "Patch": 22
   },
-  "preview": "true",
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "groups": [
     {
       "name": "advanced",
       "displayName": "ms-resource:loc.group.displayName.advanced",
       "isExpanded": false
+    },
+    {
+      "name": "ApiProduct",
+      "displayName": "ms-resource:loc.group.displayName.ApiProduct",
+      "isExpanded": true,
+      "visibleRule": "action = Create Or Update API Product"
+    },
+    {
+      "name": "ApiDefinition",
+      "displayName": "ms-resource:loc.group.displayName.ApiDefinition",
+      "isExpanded": true,
+      "visibleRule": "action = Create Or Update API definition"
     }
   ],
   "inputs": [
@@ -52,11 +63,24 @@
       "visibleRule": "ConnectedServiceNameSelector = ConnectedServiceName"
     },
     {
+      "name": "action",
+      "type": "pickList",
+      "label": "ms-resource:loc.input.label.action",
+      "defaultValue": "Create Or Update API definition",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.action",
+      "options": {
+        "Create Or Update API definition": "Create Or Update API definition",
+        "Create Or Update API Product": "Create Or Update API Product"
+      }
+    },
+    {
       "name": "WebAppName",
       "type": "pickList",
       "label": "ms-resource:loc.input.label.WebAppName",
       "defaultValue": "",
       "required": true,
+      "groupName": "ApiDefinition",
       "properties": {
         "EditableOptions": "True"
       },
@@ -83,9 +107,20 @@
       }
     },
     {
+      "name": "ApiProduct",
+      "type": "pickList",
+      "label": "ms-resource:loc.input.label.ApiProduct",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ApiProduct",
+      "properties": {
+        "EditableOptions": "True"
+      }
+    },
+    {
       "name": "ApiName",
       "type": "pickList",
       "label": "ms-resource:loc.input.label.ApiName",
+      "groupName": "ApiDefinition",
       "required": true,
       "helpMarkDown": "ms-resource:loc.input.help.ApiName",
       "properties": {
@@ -96,8 +131,39 @@
       "name": "ApiPath",
       "type": "string",
       "label": "ms-resource:loc.input.label.ApiPath",
+      "groupName": "ApiDefinition",
       "required": true,
       "helpMarkDown": "ms-resource:loc.input.help.ApiPath"
+    },
+    {
+      "name": "UseProxyCredentials",
+      "type": "boolean",
+      "label": "ms-resource:loc.input.label.UseProxyCredentials",
+      "required": false,
+      "helpMarkDown": "ms-resource:loc.input.help.UseProxyCredentials",
+      "groupName": "advanced",
+      "defaultValue": "false"
+    },
+    {
+      "name": "Description",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.Description",
+      "groupName": "ApiProduct",
+      "required": false
+    },
+    {
+      "name": "ApprovalRequired",
+      "type": "boolean",
+      "label": "ms-resource:loc.input.label.ApprovalRequired",
+      "groupName": "ApiProduct",
+      "required": false
+    },
+    {
+      "name": "SubscriptionRequired",
+      "type": "boolean",
+      "label": "ms-resource:loc.input.label.SubscriptionRequired",
+      "groupName": "ApiProduct",
+      "required": false
     }
   ],
   "dataSourceBindings": [
@@ -126,6 +192,16 @@
       "name": "availableApis",
       "endpointId": "$(ConnectedServiceName)",
       "endpointUrl": "{{endpoint.url}}/subscriptions/$(endpoint.subscriptionId)/resourceGroups/$(ResourceGroupName)/providers/Microsoft.ApiManagement/service/$(ApiManagement)/apis/?api-version=2016-10-10",
+      "resultSelector": "jsonpath:$.value[*].name",
+      "parameters": {
+        "ApiManagement": "$(ApiManagement)"
+      }
+    },
+    {
+      "target": "ApiProduct",
+      "name": "availableProducts",
+      "endpointId": "$(ConnectedServiceName)",
+      "endpointUrl": "{{endpoint.url}}/subscriptions/$(endpoint.subscriptionId)/resourceGroups/$(ResourceGroupName)/providers/Microsoft.ApiManagement/service/$(ApiManagement)/products/?api-version=2016-10-10",
       "resultSelector": "jsonpath:$.value[*].name",
       "parameters": {
         "ApiManagement": "$(ApiManagement)"

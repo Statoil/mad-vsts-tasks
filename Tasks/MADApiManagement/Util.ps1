@@ -13,13 +13,14 @@ function Configure-ApiUsingSwaggerUrl {
     Update-SwaggerAndSaveToFile -WebApp $WebApp -ApiName $ApiName
     if($api){
         Write-Host "`tUpdating existing API at $ApiPath"
-        Import-AzureRmApiManagementApi -Context $ctx -ApiId $api.ApiId -SpecificationFormat "Swagger" -SpecificationPath "$PSScriptRoot\swagger.json" -Path $ApiPath
+        $api = Import-AzureRmApiManagementApi -Context $ctx -ApiId $api.ApiId -SpecificationFormat "Swagger" -SpecificationPath "$PSScriptRoot\swagger.json" -Path $ApiPath
     }
     else{
         Write-Host "`tCreating new API at $ApiPath"     
         $apiId = [guid]::NewGuid()   
         $api = Import-AzureRmApiManagementApi -Context $ctx -ApiId $apiId -SpecificationFormat "Swagger" -SpecificationPath "$PSScriptRoot\swagger.json" -Path $ApiPath
     }
+    return $api
 }
 
 function Update-SwaggerAndSaveToFile {
