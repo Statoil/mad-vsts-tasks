@@ -1,0 +1,23 @@
+{
+  "loc.friendlyName": "MAD Configure API Management",
+  "loc.helpMarkDown": "",
+  "loc.description": "Configures API Management",
+  "loc.instanceNameFormat": "Configure API: $(ApplicationName)",
+  "loc.group.displayName.advanced": "Advanced",
+  "loc.input.label.ConnectedServiceNameSelector": "Azure Connection Type",
+  "loc.input.label.ConnectedServiceNameClassic": "Azure Classic Subscription",
+  "loc.input.help.ConnectedServiceNameClassic": "Azure Classic subscription to configure before running PowerShell",
+  "loc.input.label.ConnectedServiceName": "Azure RM Subscription",
+  "loc.input.help.ConnectedServiceName": "Azure Resource Manager subscription to configure before running PowerShell",
+  "loc.input.label.WebAppName": "App Service name",
+  "loc.input.help.WebAppName": "Enter or Select the name of an existing Azure App Service.",
+  "loc.input.label.ResourceGroupName": "Resource group",
+  "loc.input.help.ResourceGroupName": "Provide the name of a resource group.",
+  "loc.input.label.ApiManagement": "API Management",
+  "loc.input.help.ApiManagement": "Provide the name of a API Management resource",
+  "loc.input.label.ApiName": "API Name",
+  "loc.input.help.ApiName": "Provide the name of a API to create or update",
+  "loc.input.label.ApiPath": "API Path",
+  "loc.input.help.ApiPath": "Provide the path where the API will be made available",
+  "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
+}
