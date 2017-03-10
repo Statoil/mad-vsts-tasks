@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "build-task",
     "name": "Statoil MAD build tasks",
-    "version": "0.1.0",
+    "version": "0.1.19",
     "publisher": "froderoslandhus",
     "targets": [
         {
@@ -22,6 +22,9 @@
         },
         {
             "path": "MADSetupKeyVaultAccess"
+        },
+        {
+            "path": "MADApiManagement"
         }
     ],
     "contributions": [
@@ -43,6 +46,16 @@
             ],
             "properties": {
                 "name": "MADSetupKeyVaultAccess"
+            }
+        },
+        {
+            "id": "mad-configure-api-management-build-task",
+            "type": "ms.vss-distributed-task.task",
+            "targets": [
+                "ms.vss-distributed-task.tasks"
+            ],
+            "properties": {
+                "name": "MADApiManagement"
             }
         }
     ]

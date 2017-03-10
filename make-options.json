@@ -1,7 +1,8 @@
 {
     "tasks": [
         "MADCreateApplication",
-        "MADSetupKeyVaultAccess"
+        "MADSetupKeyVaultAccess",
+        "MADApiManagement"
     ],
     "taskResources": [
         "*.ps1",
