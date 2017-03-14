@@ -3,7 +3,6 @@
   "loc.helpMarkDown": "",
   "loc.description": "Configures API Management",
   "loc.instanceNameFormat": "$(action)",
-  "loc.group.displayName.advanced": "Advanced",
   "loc.group.displayName.ApiProduct": "Create Or Update Product",
   "loc.group.displayName.ApiDefinition": "Create Or Update API",
   "loc.input.label.ConnectedServiceNameSelector": "Azure Connection Type",
@@ -27,8 +26,14 @@
   "loc.input.help.ApiPath": "Provide the path where the API will be made available",
   "loc.input.label.UseProxyCredentials": "Use proxy credentials",
   "loc.input.help.UseProxyCredentials": "Use certificate credentials between API Management and API",
+  "loc.input.label.Certificates": "Certificate",
+  "loc.input.help.Certificates": "Provide the name of a API to create or update",
+  "loc.input.label.AppSettingSubject": "AppSetting Subject",
+  "loc.input.label.AppSettingIssuer": "AppSetting Issuer",
+  "loc.input.label.AppSettingThumbprint": "AppSetting Thumbprint",
   "loc.input.label.Description": "Description",
   "loc.input.label.ApprovalRequired": "Approval Required",
   "loc.input.label.SubscriptionRequired": "Subscription Required",
+  "loc.input.label.UseCertificateCredential": "Use Certificate Credential",
   "loc.messages.AppAlreadyExists": "Application already exists: '{0}'"
 }
