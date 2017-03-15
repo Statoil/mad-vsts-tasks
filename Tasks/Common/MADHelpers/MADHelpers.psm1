@@ -9,16 +9,16 @@ if ($global:DebugPreference -eq 'Continue') {
 
 function Initialize-MAD {
     [CmdletBinding()]
-    param()
+    param(
+        $ServiceName
+    )
 
     Trace-VstsEnteringInvocation $MyInvocation
-    $serviceName = Get-VstsInput -Name "ConnectedServiceNameARM" 
-    if (!$serviceName) {
-        # Let the task SDK throw an error message if the input isn't defined.
-        Get-VstsInput -Name "ConnectedServiceNameARM" -Require
+    if(!$ServiceName){
+        $ServiceName = Get-VstsInput -Name "ConnectedServiceNameARM" -Require
     }
 
-    $endpoint = Get-VstsEndpoint -Name $serviceName -Require
+    $endpoint = Get-VstsEndpoint -Name $ServiceName -Require
 
     try{
         Write-Host "##[command]Authenticating..."
@@ -91,14 +91,14 @@ function Set-AppSetting {
     [CmdletBinding()]
     param(
         [string]$webappname,
-        [string]$resourcegroup,
+        [string]$ResourceGroupName,
         [string]$name,
         [string]$value
     )
     Trace-VstsEnteringInvocation $MyInvocation
      try {
         Write-Host "##[command]Set-AppSetting $name"
-        $webapp = Get-AzureRmWebApp -Name $webappname -ResourceGroupName $resourcegroup
+        $webapp = Get-AzureRmWebApp -Name $webappname 
         $appSettings = $webapp.SiteConfig.AppSettings
 
         $settings = @{}
@@ -107,7 +107,7 @@ function Set-AppSetting {
         }
         $settings[$name] = $value
 
-        $app = Set-AzureRmWebApp -Name $webappname -ResourceGroupName $resourcegroup -AppSettings $settings
+        $app = Set-AzureRmWebApp -Name $webappname -ResourceGroupName $ResourceGroupName -AppSettings $settings
     }
     catch {
         Write-VstsTaskError -Message $_.Exception.Message

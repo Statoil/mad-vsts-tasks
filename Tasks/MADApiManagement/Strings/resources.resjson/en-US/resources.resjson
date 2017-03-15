@@ -29,7 +29,6 @@
   "loc.input.label.Certificates": "Certificate",
   "loc.input.help.Certificates": "Provide the name of a API to create or update",
   "loc.input.label.AppSettingSubject": "AppSetting Subject",
-  "loc.input.label.AppSettingIssuer": "AppSetting Issuer",
   "loc.input.label.AppSettingThumbprint": "AppSetting Thumbprint",
   "loc.input.label.Description": "Description",
   "loc.input.label.ApprovalRequired": "Approval Required",

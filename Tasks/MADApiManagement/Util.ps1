@@ -43,7 +43,7 @@ function Set-CertificateAuthentication {
         [string]$Thumbprint
     )
     if(!$Context){
-            throw (New-Object System.Exception("No context available"))
+        throw (New-Object System.Exception("No context available"))
     }
     Write-Host "##[command]Set-CertificateAuthentication"    
 
@@ -80,4 +80,35 @@ function New-Policy {
 </policies>
 "@
     return [xml]$policy
+}
+
+function Set-ClientCertProperty {
+    param(
+        [string]$WebAppName, 
+        [bool]$Enabled
+    )
+    Write-Host "##[command]Set-ClientCertProperty -WebAppName $WebAppName -Enabled $Enabled"
+
+    $app = Get-AzureRmWebApp -Name $WebAppName
+    $enabledValue = ([string]$Enabled).ToLower() #bool value must be lowercase for api to accept it
+    $payload = @"
+    {
+        "location": "$($app.Location)",
+        "properties": {
+            "clientCertEnabled": $enabledValue
+        }
+    }
+"@
+    $result = Set-AzureRestValue -Uri "$($app.Id)?api-version=2015-04-01" -Payload $payload
+}
+
+function Set-CertAppSettings{
+    param(
+        [string]$WebAppName, 
+        $Certificate
+    )
+    Write-Host "##[command]Set-CertAppSettings"
+    $app = Get-AzureRmWebApp -Name $WebAppName
+    Set-AppSetting -webappname $WebAppName -ResourceGroupName $app.ResourceGroup -name (Get-VstsInput -Name AppSettingSubject -Require) -value $certificate.Subject
+    Set-AppSetting -webappname $WebAppName -ResourceGroupName $app.ResourceGroup -name (Get-VstsInput -Name AppSettingThumbprint -Require) -value $certificate.Thumbprint        
 }

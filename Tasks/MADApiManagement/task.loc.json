@@ -9,7 +9,7 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 34
+    "Patch": 39
   },
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "groups": [
@@ -156,15 +156,7 @@
       "type": "string",
       "label": "ms-resource:loc.input.label.AppSettingSubject",
       "groupName": "ApiDefinition",
-      "required": false,
-      "visibleRule": "UseProxyCredentials = true"
-    },
-    {
-      "name": "AppSettingIssuer",
-      "type": "string",
-      "label": "ms-resource:loc.input.label.AppSettingIssuer",
-      "groupName": "ApiDefinition",
-      "required": false,
+      "required": true,
       "visibleRule": "UseProxyCredentials = true"
     },
     {
@@ -172,7 +164,7 @@
       "type": "string",
       "label": "ms-resource:loc.input.label.AppSettingThumbprint",
       "groupName": "ApiDefinition",
-      "required": false,
+      "required": true,
       "visibleRule": "UseProxyCredentials = true"
     },
     {

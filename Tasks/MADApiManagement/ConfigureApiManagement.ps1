@@ -3,10 +3,13 @@ $apiManagement = Get-VstsInput -Name ApiManagement -Require
 $resourceGroupName = Get-VstsInput -Name ResourceGroupName -Require
 $productName = Get-VstsInput -Name ApiProduct -Require
 $action = Get-VstsInput -Name action -Require
+
 try{
     Import-Module $PSScriptRoot\ps_modules\VstsAzureHelpers_
+    Import-Module $PSScriptRoot\ps_modules\MADHelpers
 
     Initialize-Azure
+    Initialize-MAD -ServiceName (Get-VstsInput -Name "ConnectedServiceName" -Require)
 
     . "$PSScriptRoot\Util.ps1"
 
@@ -44,7 +47,12 @@ try{
                 throw (New-Object System.Exception("Certificate with thumbprint $certificateThumbprint doesn't exist"))
             }
             Set-CertificateAuthentication -Context $ctx -ApiId $api.ApiId -Thumbprint $certificate.Thumbprint
+            Set-ClientCertProperty -WebAppName $webapp -Enabled $true
+            Set-CertAppSettings -WebAppName $webapp -Certificate $certificate
         }    
+        else{
+            Set-ClientCertProperty -WebAppName $webapp -Enabled $false
+        }
     }
     else {
         $product = Get-AzureRmApiManagementProduct -Context $ctx -Title $productName

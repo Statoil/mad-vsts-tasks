@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 34
+        "Patch": 39
     },
     "instanceNameFormat": "$(action)",
     "groups": [
@@ -156,15 +156,7 @@
             "type": "string",
             "label": "AppSetting Subject",
             "groupName": "ApiDefinition",
-            "required": false,
-            "visibleRule": "UseProxyCredentials = true"
-        },
-        {
-            "name": "AppSettingIssuer",
-            "type": "string",
-            "label": "AppSetting Issuer",
-            "groupName": "ApiDefinition",
-            "required": false,
+            "required": true,
             "visibleRule": "UseProxyCredentials = true"
         },
         {
@@ -172,7 +164,7 @@
             "type": "string",
             "label": "AppSetting Thumbprint",
             "groupName": "ApiDefinition",
-            "required": false,
+            "required": true,
             "visibleRule": "UseProxyCredentials = true"
         },
         {
