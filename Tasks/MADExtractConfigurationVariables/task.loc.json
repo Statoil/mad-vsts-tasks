@@ -9,8 +9,18 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 0
+    "Patch": 1
   },
+  "inputs": [
+    {
+      "name": "ConfigurationName",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.ConfigurationName",
+      "defaultValue": "$(BuildConfiguration)",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ConfigurationName"
+    }
+  ],
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "execution": {
     "Node": {
