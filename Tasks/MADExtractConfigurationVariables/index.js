@@ -11,7 +11,7 @@ Object.keys(env).forEach((key) => {
 
   if (key.startsWith(prefix)) {
     const envVar = env[key];
-    const newKey = key.replace(`${configuration}_`, '');
+    const newKey = key.replace(prefix, '');
     process.stdout.write(`##vso[task.setvariable variable=${newKey};]${envVar}\n`);
   }
 });
