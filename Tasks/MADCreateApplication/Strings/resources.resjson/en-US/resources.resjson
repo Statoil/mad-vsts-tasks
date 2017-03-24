@@ -16,6 +16,8 @@
   "loc.input.help.SignInUrl": "The home page of the application",
   "loc.input.label.IdentifierUri": "Identifier Uri",
   "loc.input.help.IdentifierUri": "The identifier/reply uri for the application",
+  "loc.input.label.AddKey": "Add Key Credential",
+  "loc.input.help.AddKey": "Create a key and expose it through $(APPLICATIONKEYSECRET)",
   "loc.input.label.AddCertificateCredential": "Add certificate credentials",
   "loc.input.help.AddCertificateCredential": "If this is true, the Azure AD Application will use certificate credentials for use with access policies.",
   "loc.input.label.CertificateLocation": "Certificate Location",

@@ -9,7 +9,7 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 17
+    "Patch": 20
   },
   "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
   "groups": [
@@ -81,6 +81,15 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "ms-resource:loc.input.help.IdentifierUri"
+    },
+    {
+      "name": "AddKey",
+      "type": "boolean",
+      "label": "ms-resource:loc.input.label.AddKey",
+      "defaultValue": "false",
+      "required": false,
+      "helpMarkDown": "ms-resource:loc.input.help.AddKey",
+      "groupName": "advanced"
     },
     {
       "name": "AddCertificateCredential",

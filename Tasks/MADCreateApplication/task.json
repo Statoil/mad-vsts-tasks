@@ -9,7 +9,7 @@
     "version": {
         "Major": 0,
         "Minor": 1,
-        "Patch": 17
+        "Patch": 20
     },
     "instanceNameFormat": "Create Application: $(ApplicationName)",
     "groups": [
@@ -81,6 +81,15 @@
             "defaultValue": "",
             "required": true,
             "helpMarkDown": "The identifier/reply uri for the application"
+        },
+        {
+            "name": "AddKey",
+            "type": "boolean",
+            "label": "Add Key Credential",
+            "defaultValue": "false",
+            "required": false,
+            "helpMarkDown": "Create a key and expose it through $(APPLICATIONKEYSECRET)",
+            "groupName": "advanced"
         },
         {
             "name": "AddCertificateCredential",

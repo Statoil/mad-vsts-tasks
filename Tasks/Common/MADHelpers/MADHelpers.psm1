@@ -6,6 +6,7 @@ if ($global:DebugPreference -eq 'Continue') {
 }
 
 . $PSScriptRoot/AuthUtil.ps1
+. $PSScriptRoot/New-SWRandomPassword.ps1
 
 function Initialize-MAD {
     [CmdletBinding()]
@@ -119,3 +120,4 @@ Export-ModuleMember -Function Initialize-MAD
 Export-ModuleMember -Function Get-AzureRestValue
 Export-ModuleMember -Function Set-AzureRestValue
 Export-ModuleMember -Function Set-AppSetting
+Export-ModuleMember -Function New-SWRandomPassword
