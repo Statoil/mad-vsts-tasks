@@ -1,0 +1,20 @@
+{
+  "id": "EF37FDB5-CF9D-49DC-9529-27A81AD16551",
+  "name": "MADExtractConfigurationVariables",
+  "friendlyName": "ms-resource:loc.friendlyName",
+  "description": "ms-resource:loc.description",
+  "helpMarkDown": "ms-resource:loc.helpMarkDown",
+  "category": "Utility",
+  "author": "Statoil MAD",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 0
+  },
+  "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
+  "execution": {
+    "Node": {
+      "target": "index.js"
+    }
+  }
+}

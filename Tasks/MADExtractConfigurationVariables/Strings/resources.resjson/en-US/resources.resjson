@@ -1,0 +1,6 @@
+{
+  "loc.friendlyName": "MAD Extract Configuration Variables",
+  "loc.helpMarkDown": "",
+  "loc.description": "Extracts variables that are prefixed with the build configuration name",
+  "loc.instanceNameFormat": "Extracts variables for: $(BuildConfiguration)"
+}
