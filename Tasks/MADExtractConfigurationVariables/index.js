@@ -5,7 +5,7 @@ const configuration = env.INPUT_CONFIGURATIONNAME;
 process.stdout.write(`Collapsing environment variables for the ${configuration} build\n`);
 
 Object.keys(env).forEach((key) => {
-  const prefix = `${configuration}_`;
+  const prefix = `${configuration}_`.toUpperCase();
 
   if (key.startsWith(prefix)) {
     const envVar = env[key];
