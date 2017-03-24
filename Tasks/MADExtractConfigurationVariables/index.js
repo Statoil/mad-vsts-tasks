@@ -1,12 +1,6 @@
-const argv = require('minimist')(process.argv.slice(2));
-
-let {
-  configuration = 'DEBUG',
-} = argv;
-
-configuration = configuration.toUpperCase();
 
 const env = process.env;
+const configuration = env.INPUT_CONFIGURATIONNAME;
 
 process.stdout.write(`Collapsing environment variables for the ${configuration} build\n`);
 
