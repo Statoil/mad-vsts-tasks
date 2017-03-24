@@ -2,13 +2,15 @@
     "tasks": [
         "MADCreateApplication",
         "MADSetupKeyVaultAccess",
-        "MADApiManagement"
+        "MADApiManagement",
+        "MADExtractConfigurationVariables"
     ],
     "taskResources": [
         "*.ps1",
         "*.psd1",
         "*.psm1",
         "*.sh",
+        "*.js",
         "*.dll",
         "*.txt",
         "icon.png",

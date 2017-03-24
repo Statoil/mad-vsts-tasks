@@ -1,62 +1,75 @@
 {
-    "manifestVersion": 1,
-    "id": "build-task",
-    "name": "Statoil MAD build tasks",
-    "version": "0.2.3",
-    "publisher": "froderoslandhus",
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],    
-    "description": "Tools for provisioning Azure infrastructure.",
-    "categories": [
-        "Build and release"
-    ],
-    "icons": {
-        "default": "images/extension-icon.png"        
+  "manifestVersion": 1,
+  "id": "build-task",
+  "name": "Statoil MAD build tasks",
+  "version": "0.2.3",
+  "publisher": "froderoslandhus",
+  "targets": [
+    {
+        "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "Tools for provisioning Azure infrastructure.",
+  "categories": [
+    "Build and release"
+  ],
+  "icons": {
+      "default": "images/extension-icon.png"
+  },
+  "files": [
+    {
+        "path": "MADCreateApplication"
     },
-    "files": [
-        {
-            "path": "MADCreateApplication"
-        },
-        {
-            "path": "MADSetupKeyVaultAccess"
-        },
-        {
-            "path": "MADApiManagement"
-        }
-    ],
-    "contributions": [
-        {
-            "id": "mad-create-azure-application-build-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "MADCreateApplication"
-            }
-        },
-        {
-            "id": "mad-setup-keyvault-access-build-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "MADSetupKeyVaultAccess"
-            }
-        },
-        {
-            "id": "mad-configure-api-management-build-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "MADApiManagement"
-            }
-        }
-    ]
+    {
+        "path": "MADSetupKeyVaultAccess"
+    },
+    {
+        "path": "MADApiManagement"
+    },
+    {
+        "path": "MADExtractConfigurationVariables"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "mad-create-azure-application-build-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MADCreateApplication"
+      }
+    },
+    {
+      "id": "mad-setup-keyvault-access-build-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MADSetupKeyVaultAccess"
+      }
+    },
+    {
+      "id": "mad-configure-api-management-build-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MADApiManagement"
+      }
+    },
+    {
+      "id": "mad-extract-configurationvariables-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MADExtractConfigurationVariables"
+      }
+    }
+  ]
 }

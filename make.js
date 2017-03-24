@@ -145,7 +145,7 @@ target.build = function() {
         }
 
         //--------------------------------
-        // Common: build, copy, install 
+        // Common: build, copy, install
         //--------------------------------
         if (taskMake.hasOwnProperty('common')) {
             var common = taskMake['common'];
