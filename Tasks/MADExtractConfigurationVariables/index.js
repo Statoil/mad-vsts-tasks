@@ -7,6 +7,8 @@ process.stdout.write(`Collapsing environment variables for the ${configuration} 
 Object.keys(env).forEach((key) => {
   const prefix = `${configuration}_`.toUpperCase();
 
+  process.stdout.write(`testing environment variable '${key}' against prefix ${prefix} \n`);
+
   if (key.startsWith(prefix)) {
     const envVar = env[key];
     const newKey = key.replace(`${configuration}_`, '');
