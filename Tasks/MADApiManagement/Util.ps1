@@ -28,7 +28,7 @@ function Update-SwaggerAndSaveToFile {
     )
     Write-Host "`tModifying swagger definition"     
     $hostname = "$WebApp.azurewebsites.net"
-    $swagger = Invoke-RestMethod -Method Get -Uri "https://$hostname/swagger/v1/swagger.json"
+    $swagger = Invoke-RestMethod -Method Get -Uri "http://$hostname/swagger/v1/swagger.json"
     $info = $swagger.info
     $info.title = $ApiName
     $swagger | Add-Member -MemberType NoteProperty -Name "host" -value $hostname
