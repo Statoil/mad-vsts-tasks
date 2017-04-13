@@ -1,0 +1,24 @@
+{
+  "name": "mad-preconfigure-xcode-project-file",
+  "version": "0.1.6",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Statoil/mad-vsts-tasks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Statoil/mad-vsts-tasks/issues"
+  },
+  "homepage": "https://github.com/Statoil/mad-vsts-tasks#readme",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "vsts-task-lib": "^2.0.2-preview",
+    "xcode-node": "^1.0.2"
+  }
+}

@@ -1,4 +1,3 @@
-
 const env = process.env;
 const configuration = env.INPUT_CONFIGURATIONNAME;
 

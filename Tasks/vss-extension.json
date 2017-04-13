@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "build-task",
   "name": "Statoil MAD build tasks",
-  "version": "0.2.40",
+  "version": "0.2.45",
   "publisher": "froderoslandhus",
   "targets": [
     {
@@ -28,6 +28,9 @@
     },
     {
         "path": "MADExtractConfigurationVariables"
+    },
+    {
+        "path": "MADPreconfigureXcodeProjectFile"
     }
   ],
   "contributions": [
@@ -69,6 +72,16 @@
       ],
       "properties": {
         "name": "MADExtractConfigurationVariables"
+      }
+    },
+    {
+      "id": "mad-preconfigure-xcode-project-file",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "MADPreconfigureXcodeProjectFile"
       }
     }
   ]
