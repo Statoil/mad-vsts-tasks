@@ -1,0 +1,62 @@
+{
+  "id": "0B90A8C5-9754-4BA3-9CE3-4B6EF5687AC5",
+  "name": "MADPreconfigureXcodeProjectFile",
+  "friendlyName": "MAD Preconfigure Xcode Project File",
+  "description": "Updates name and bundleid of xcode project file",
+  "helpMarkDown": "",
+  "category": "Utility",
+  "author": "Statoil MAD",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 7
+  },
+  "inputs" : [
+    {
+        "name": "ConfigurationName",
+        "type": "string",
+        "label": "Build configuration name",
+        "defaultValue": "$(Configuration)",
+        "required": true,
+        "helpMarkDown": "Name of the build target we want to manipulate"
+    },
+    {
+        "name": "FilePath",
+        "type": "string",
+        "label": "Path to the file(s) to manipulate",
+        "defaultValue": "**/*.pbxproj",
+        "required": true,
+        "helpMarkDown": "Use Glob syntax to match the filepath to the files we want to manipulate"
+    },
+    {
+        "name": "ProductBundleIdentifier",
+        "type": "string",
+        "label": "Bundle Identifier we want to set",
+        "defaultValue": "$(PRODUCT_BUNDLE_IDENTIFIER)",
+        "required": true,
+        "helpMarkDown": "The bundle identifier we want to build our product with"
+    },
+    {
+        "name": "ProductName",
+        "type": "string",
+        "label": "Name we want our product to be released with",
+        "defaultValue": "$(APP_NAME)",
+        "required": true,
+        "helpMarkDown": "The name we want our application to be released with"
+    },
+    {
+        "name": "ensureProvisioningStyleManual",
+        "type": "boolean",
+        "label": "Ensure that ProvisioningStyle is set to Manual",
+        "defaultValue": "true",
+        "required": false,
+        "helpMarkDown": "Updates the pbxproj with ProvisioningStyle set to manual"
+    }
+  ],
+  "instanceNameFormat": "Updates xcode configuration for: $(Configuration)",
+  "execution": {
+    "Node": {
+      "target": "index.js"
+    }
+  }
+}

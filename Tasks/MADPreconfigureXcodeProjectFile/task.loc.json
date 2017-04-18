@@ -1,0 +1,62 @@
+{
+  "id": "0B90A8C5-9754-4BA3-9CE3-4B6EF5687AC5",
+  "name": "MADPreconfigureXcodeProjectFile",
+  "friendlyName": "ms-resource:loc.friendlyName",
+  "description": "ms-resource:loc.description",
+  "helpMarkDown": "ms-resource:loc.helpMarkDown",
+  "category": "Utility",
+  "author": "Statoil MAD",
+  "version": {
+    "Major": 0,
+    "Minor": 1,
+    "Patch": 7
+  },
+  "inputs": [
+    {
+      "name": "ConfigurationName",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.ConfigurationName",
+      "defaultValue": "$(Configuration)",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ConfigurationName"
+    },
+    {
+      "name": "FilePath",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.FilePath",
+      "defaultValue": "**/*.pbxproj",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.FilePath"
+    },
+    {
+      "name": "ProductBundleIdentifier",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.ProductBundleIdentifier",
+      "defaultValue": "$(PRODUCT_BUNDLE_IDENTIFIER)",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ProductBundleIdentifier"
+    },
+    {
+      "name": "ProductName",
+      "type": "string",
+      "label": "ms-resource:loc.input.label.ProductName",
+      "defaultValue": "$(APP_NAME)",
+      "required": true,
+      "helpMarkDown": "ms-resource:loc.input.help.ProductName"
+    },
+    {
+      "name": "ensureProvisioningStyleManual",
+      "type": "boolean",
+      "label": "ms-resource:loc.input.label.ensureProvisioningStyleManual",
+      "defaultValue": "true",
+      "required": false,
+      "helpMarkDown": "ms-resource:loc.input.help.ensureProvisioningStyleManual"
+    }
+  ],
+  "instanceNameFormat": "ms-resource:loc.instanceNameFormat",
+  "execution": {
+    "Node": {
+      "target": "index.js"
+    }
+  }
+}

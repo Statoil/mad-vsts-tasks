@@ -1,0 +1,16 @@
+{
+  "loc.friendlyName": "MAD Preconfigure Xcode Project File",
+  "loc.helpMarkDown": "",
+  "loc.description": "Updates name and bundleid of xcode project file",
+  "loc.instanceNameFormat": "Updates xcode configuration for: $(Configuration)",
+  "loc.input.label.ConfigurationName": "Build configuration name",
+  "loc.input.help.ConfigurationName": "Name of the build target we want to manipulate",
+  "loc.input.label.FilePath": "Path to the file(s) to manipulate",
+  "loc.input.help.FilePath": "Use Glob syntax to match the filepath to the files we want to manipulate",
+  "loc.input.label.ProductBundleIdentifier": "Bundle Identifier we want to set",
+  "loc.input.help.ProductBundleIdentifier": "The bundle identifier we want to build our product with",
+  "loc.input.label.ProductName": "Name we want our product to be released with",
+  "loc.input.help.ProductName": "The name we want our application to be released with",
+  "loc.input.label.ensureProvisioningStyleManual": "Ensure that ProvisioningStyle is set to Manual",
+  "loc.input.help.ensureProvisioningStyleManual": "Updates the pbxproj with ProvisioningStyle set to manual"
+}

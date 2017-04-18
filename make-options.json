@@ -3,7 +3,8 @@
         "MADCreateApplication",
         "MADSetupKeyVaultAccess",
         "MADApiManagement",
-        "MADExtractConfigurationVariables"
+        "MADExtractConfigurationVariables",
+        "MADPreconfigureXcodeProjectFile"
     ],
     "taskResources": [
         "*.ps1",
