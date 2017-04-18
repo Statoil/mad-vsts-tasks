@@ -10,7 +10,7 @@ const run = () => {
     const filePathGlob = tl.getInput('FilePath', true);
     const productBundleIdentifier = tl.getInput('ProductBundleIdentifier', true);
     const productName = tl.getInput('ProductName', true);
-
+    const ensureProvisioningStyleManual = tl.getBoolInput('ensureProvisioningStyleManual');
     // Paths
     const workingDir = tl.getPathInput('cwd');
     const fileMatches = tl.findMatch(
@@ -36,6 +36,11 @@ const run = () => {
           'PRODUCT_NAME',
           productName);
       });
+
+      if(ensureProvisioningStyleManual) {
+        tl.debug("Ensures that ProvisionStyle is set to Manual");
+        project.myProj.addTargetAttribute("ProvisioningStyle", "Manual");
+      }
 
       project.save();
     });

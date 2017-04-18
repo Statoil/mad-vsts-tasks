@@ -10,5 +10,7 @@
   "loc.input.label.ProductBundleIdentifier": "Bundle Identifier we want to set",
   "loc.input.help.ProductBundleIdentifier": "The bundle identifier we want to build our product with",
   "loc.input.label.ProductName": "Name we want our product to be released with",
-  "loc.input.help.ProductName": "The name we want our application to be released with"
+  "loc.input.help.ProductName": "The name we want our application to be released with",
+  "loc.input.label.ensureProvisioningStyleManual": "Ensure that ProvisioningStyle is set to Manual",
+  "loc.input.help.ensureProvisioningStyleManual": "Updates the pbxproj with ProvisioningStyle set to manual"
 }

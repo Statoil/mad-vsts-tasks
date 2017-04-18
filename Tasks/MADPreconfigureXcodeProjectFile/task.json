@@ -9,7 +9,7 @@
   "version": {
     "Major": 0,
     "Minor": 1,
-    "Patch": 6
+    "Patch": 7
   },
   "inputs" : [
     {
@@ -43,6 +43,14 @@
         "defaultValue": "$(APP_NAME)",
         "required": true,
         "helpMarkDown": "The name we want our application to be released with"
+    },
+    {
+        "name": "ensureProvisioningStyleManual",
+        "type": "boolean",
+        "label": "Ensure that ProvisioningStyle is set to Manual",
+        "defaultValue": "true",
+        "required": false,
+        "helpMarkDown": "Updates the pbxproj with ProvisioningStyle set to manual"
     }
   ],
   "instanceNameFormat": "Updates xcode configuration for: $(Configuration)",
