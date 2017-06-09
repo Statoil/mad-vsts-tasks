@@ -37,7 +37,6 @@ try {
             Write-Host "`tUpdating credentials for application"
             Update-CertificateCredentials -applicationId $applicationId -certificate $pfx
             $sp = Create-ServicePrincipal $apps[0]
-            Write-Host "##vso[task.setvariable variable=APPLICATIONID;]$($apps[0].ApplicationId)"            
         }
         if ($createKey) {
             Write-Host "`tCreating key..."            
@@ -45,6 +44,7 @@ try {
             New-AzureRmADAppCredential -ApplicationId $applicationId -Password $key
             Write-Host "##vso[task.setvariable variable=APPLICATIONKEYSECRET;issecret=true;]$key"                        
         }
+        Write-Host "##vso[task.setvariable variable=APPLICATIONID;]$applicationId"            
         return
     }
 
