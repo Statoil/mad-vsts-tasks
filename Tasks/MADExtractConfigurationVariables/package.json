@@ -16,7 +16,7 @@
     "url": "https://github.com/Statoil/mad-vsts-tasks/issues"
   },
   "homepage": "https://github.com/Statoil/mad-vsts-tasks#readme",
-  "dependencies" : {
+  "dependencies": {
     "minimist": "^1.2.0"
   }
 }
