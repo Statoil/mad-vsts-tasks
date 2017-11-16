@@ -29,6 +29,10 @@ function Update-SwaggerAndSaveToFile {
     Write-Host "`tModifying swagger definition"     
     $hostname = "$WebApp.azurewebsites.net"
     $swagger = Invoke-RestMethod -Method Get -Uri "http://$hostname/swagger/v1/swagger.json"
+    if ($swagger.GetType().Name -eq "String" -and $swagger.StartsWith("ï»¿")) {
+        #result is recognized as string, not a json object, because of byte order mark
+        $swagger = ConvertFrom-json -InputObject $swagger.Substring(3);    
+    }
     $info = $swagger.info
     $info.title = $ApiName
     $swagger | Add-Member -MemberType NoteProperty -Name "host" -value $hostname
