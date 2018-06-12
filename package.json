@@ -10,11 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "adm-zip": "0.4.7",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-util": "3.0.4",
     "minimatch": "3.0.2",
     "minimist": "1.1.1",
-    "mocha": "2.3.3",
+    "mocha": "^5.2.0",
     "node-uuid": "1.4.6",
     "q": "1.4.1",
     "semver": "4.3.3",
@@ -24,6 +24,6 @@
     "validator": "3.33.0"
   },
   "dependencies": {
-    "tfx-cli": "^0.4.11"
+    "tfx-cli": "^0.5.10"
   }
 }
