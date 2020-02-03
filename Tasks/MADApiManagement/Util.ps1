@@ -28,8 +28,11 @@ function Update-SwaggerAndSaveToFile {
     )
     Write-Host "`tModifying swagger definition"     
     $hostname = "$WebApp.azurewebsites.net"
+	Write-Host "´t $hostname"
     $swagger = Invoke-RestMethod -Method Get -Uri "http://$hostname/swagger/v1/swagger.json"
     $swType = $swagger.GetType().Name
+	Write-Host "´t $swType"
+	Write-Host "´t $swagger"
     if ($swType -eq "String") {
         #result is recognized as string, not a json object, because of byte order mark
         Write-Host "`tSwagger file format is wrong - convert to json"
