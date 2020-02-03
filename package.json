@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "adm-zip": "0.4.7",
+    "adm-zip": "0.4.11",
     "gulp": "^4.0.0",
     "gulp-util": "3.0.4",
     "minimatch": "3.0.2",
