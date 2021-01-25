@@ -22,7 +22,8 @@
     "shelljs": "^0.3.0",
     "sync-request": "3.0.1",
     "typescript": "1.8.7",
-    "validator": "3.33.0"
+    "validator": "3.33.0",
+    "yargs-parser": ">=5.0.0-security.0"
   },
   "dependencies": {
     "tfx-cli": "^0.7.11"
